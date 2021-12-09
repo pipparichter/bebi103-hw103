@@ -82,7 +82,7 @@ def get_successive_poisson_params(data):
     B1, B2 = res[0], res[1]
     return (B1, B2)
 
-def conf_int_gamma_params(data, upper=97.5, lower=2.5):
+def get_bootstrapped_gamma_params(data, upper=97.5, lower=2.5):
     '''
     Obtains the confidence intervals for the data for a single
     concentration. Also computes the mean values, and returns those. 
@@ -94,11 +94,13 @@ def conf_int_gamma_params(data, upper=97.5, lower=2.5):
         a, b = mle(rep, log_llh_gamma, np.ones(2))
         a_arr.append(a)
         b_arr.append(b)
+    return (a_arr, b_arr)
+    
 
-    conf_int_a = np.percentile(a_arr, [lower, upper])
-    conf_int_b = np.percentile(b_arr, [lower, upper])
+    # conf_int_a = np.percentile(a_arr, [lower, upper])
+    # conf_int_b = np.percentile(b_arr, [lower, upper])
     
-    res['a'] = {'mean':np.mean(a_arr), 'conf_int':conf_int_a}
-    res['b'] = {'mean':np.mean(b_arr), 'conf_int':conf_int_b}
+    # res['a'] = {'mean':np.mean(a_arr), 'conf_int':conf_int_a}
+    # res['b'] = {'mean':np.mean(b_arr), 'conf_int':conf_int_b}
     
-    return res
+    # return res
